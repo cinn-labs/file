@@ -20,3 +20,11 @@ func FromString(filePath, s string) error {
 
 	return err
 }
+
+func FromStringWithoutOverriding(filePath, s string) error {
+	var err error
+	if _, err = os.Stat(filePath); os.IsNotExist(err) {
+		return FromString(filePath, s)
+	}
+	return err
+}
